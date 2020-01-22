@@ -1,0 +1,7 @@
+<%= form_for @broadcast do |f| %>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <%= f.label :post_image %>
+  <%= f.file_field :post_image %>
+  <%= f.submit  %>
+<% end %>
