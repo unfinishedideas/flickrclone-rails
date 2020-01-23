@@ -1,1 +1,13 @@
 <h2>All Members</h2>
+
+<% if @members.any? %>
+<ul>
+  <% @members.each do |member| %>
+  <li><%= link_to member.name, member_path(member) %></li>
+  <% end %>
+</ul>
+<% else %>
+<h3>There are no members to display!</h3>
+<% end %>
+
+<p><%= link_to "Create new member", new_member_path %></p>

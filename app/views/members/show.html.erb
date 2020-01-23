@@ -1,1 +1,12 @@
 <h2>Show Member</h2>
+
+<h3><%= @member.name %></h3>
+<% if @member.broadcasts.any? %>
+<ul>
+  <% @member.broadcasts.each do |broadcast| %>
+  <li><%= link_to broadcast.description, member_broadcast_path(@member, broadcast) %></li>
+</ul>
+<% end %>
+<% else %>
+<p>No broadcasts</p>
+<% end %>

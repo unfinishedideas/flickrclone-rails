@@ -1,23 +1,28 @@
+require 'pry'
+
 class MembersController < ApplicationController
-  before_action :authorize, only: [:new, :create, :edit, :update, :destroy]
+  # before_action :authorize, only: [:new, :create, :edit, :update, :destroy]
+# before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     @members = Member.all
+    # binding.pry
     render :index
   end
 
   def new
     @member = Member.new
+    render :new
   end
 
   def create
     @member = Member.new(member_params)
     if @member.save
-      flash[:notice] = "You've successfully signed up!"
+      flash[:notice] = "Member Created!"
       session[:member_id] = @member.id
-      redirect_to "/"
+      redirect_to members_path
     else
-      flash[:alert] = "There was a problem signing up."
+      flash[:alert] = "There was a problem making a member."
       redirect_to '/signup'
     end
   end
@@ -50,6 +55,6 @@ class MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:email, :password, :password_confirmation)
+    params.require(:member).permit(:name)
   end
 end
